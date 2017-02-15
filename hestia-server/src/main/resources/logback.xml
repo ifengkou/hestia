@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<!--实时查看logback运行状态。默认值为false。-->
 <configuration scan="false" scanPeriod="60 seconds" debug="false">
-    <property resource="application.properties" />
-    <property name="log.project.level" value="${log.project.level}" />
-    <property name="log.program.level" value="${log.program.level}" />
-    <property name="log.base" value="${log.base}" />
-    <property name="log.moduleName" value="${log.moduleName}" />
-    <property name="log.max.size" value="50MB" />
+    <property resource="application.properties"/>
+    <property name="log.project.level" value="${log.project.level}"/>
+    <property name="log.program.level" value="${log.program.level}"/>
+    <property name="log.base" value="${log.base.path}"/>
+    <property name="log.moduleName" value="${log.moduleName}"/>
+    <property name="log.max.size" value="50MB"/>
 
     <!-- ch.qos.logback.core.ConsoleAppender 表示控制台输出 -->
     <appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
@@ -73,14 +74,14 @@
         <discardingThreshold>0</discardingThreshold>
         <queueSize>256</queueSize>
         <includeCallerData>true</includeCallerData>
-        <appender-ref ref="project.all" />
+        <appender-ref ref="project.all"/>
     </appender>
 
     <appender name="program.async" class="ch.qos.logback.classic.AsyncAppender">
         <discardingThreshold>0</discardingThreshold>
         <queueSize>256</queueSize>
         <includeCallerData>true</includeCallerData>
-        <appender-ref ref="program.all" />
+        <appender-ref ref="program.all"/>
     </appender>
 
     <!-- Spring framework logger -->
@@ -88,13 +89,13 @@
 
     <logger name="cn.ifengkou.hestia" level="${log.project.level}" additivity="false">
         <appender-ref ref="stdout"/>
-        <appender-ref ref="project.async" />
-        <appender-ref ref="file.error" />
+        <appender-ref ref="project.async"/>
+        <appender-ref ref="file.error"/>
     </logger>
 
     <root level="${log.program.level}">
         <appender-ref ref="stdout"/>
-        <appender-ref ref="program.async" />
-        <appender-ref ref="file.error" />
+        <appender-ref ref="program.async"/>
+        <appender-ref ref="file.error"/>
     </root>
 </configuration>
