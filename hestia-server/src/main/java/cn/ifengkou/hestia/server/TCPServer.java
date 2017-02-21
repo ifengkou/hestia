@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
+
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import java.net.InetSocketAddress;
@@ -35,13 +36,13 @@ public class TCPServer {
 
     @PostConstruct
     public void start() throws InterruptedException {
-        LOGGER.info("Starting server at {}", tcpPort);
+        LOGGER.info("Starting server at {}", tcpPort.toString());
         serverChannelFuture = serverBootstrap.bind(tcpPort).sync();
     }
 
     @PreDestroy
     public void stop() throws Exception {
-        LOGGER.info("Closing server at {}", tcpPort);
+        LOGGER.info("Closing server at {}", tcpPort.toString());
         serverChannelFuture.channel().closeFuture().sync();
     }
 }

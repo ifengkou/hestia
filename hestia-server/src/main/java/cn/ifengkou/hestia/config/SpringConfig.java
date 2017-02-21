@@ -3,6 +3,7 @@ package cn.ifengkou.hestia.config;
 import cn.ifengkou.hestia.handler.TCPChannelInitializer;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelOption;
+import io.netty.channel.WriteBufferWaterMark;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.codec.string.StringDecoder;
@@ -67,6 +68,12 @@ public class SpringConfig {
         Map<ChannelOption<?>, Object> options = new HashMap<ChannelOption<?>, Object>();
         options.put(ChannelOption.SO_KEEPALIVE, keepAlive);
         options.put(ChannelOption.SO_BACKLOG, backlog);
+        options.put(ChannelOption.CONNECT_TIMEOUT_MILLIS, 5000);
+        options.put(ChannelOption.SO_TIMEOUT, 3000);
+        //SO_RCVBUF，SO_SNDBUF需要根据推送消息的大小，合理设置
+        options.put(ChannelOption.SO_RCVBUF, 10240);
+        options.put(ChannelOption.SO_SNDBUF, 10240);
+        options.put(ChannelOption.WRITE_BUFFER_WATER_MARK, new WriteBufferWaterMark(32768, 65536));
         return options;
     }
 
@@ -90,6 +97,7 @@ public class SpringConfig {
         for (ChannelOption option : keySet) {
             bootstrap.option(option, tcpChannelOptions.get(option));
         }
+
         return bootstrap;
     }
 

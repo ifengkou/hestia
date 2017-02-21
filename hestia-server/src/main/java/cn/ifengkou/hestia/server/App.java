@@ -16,7 +16,7 @@ import org.springframework.context.support.AbstractApplicationContext;
 public class App {
     private static final Logger LOGGER = LoggerFactory.getLogger(App.class);
 
-    private static final Object WAIT_OBJECT = new Object();
+    //private static final Object WAIT_OBJECT = new Object();
 
     public static void main(String[] args){
         LOGGER.info("Start Application");
@@ -24,14 +24,14 @@ public class App {
         AbstractApplicationContext context = new AnnotationConfigApplicationContext(SpringConfig.class);
         context.registerShutdownHook();
 
-        synchronized (WAIT_OBJECT){
+        /*synchronized (WAIT_OBJECT){
             try {
                 LOGGER.info("Main Thread Wait");
                 WAIT_OBJECT.wait();
             } catch (InterruptedException e) {
                 LOGGER.error("Main Thread interrupted",e);
             }
-        }
+        }*/
     }
 
 }
