@@ -8,6 +8,7 @@ import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.codec.string.StringDecoder;
 import io.netty.handler.codec.string.StringEncoder;
+import io.netty.util.CharsetUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -79,12 +80,12 @@ public class SpringConfig {
 
     @Bean(name = "stringEncoder")
     public StringEncoder stringEncoder() {
-        return new StringEncoder();
+        return new StringEncoder(CharsetUtil.UTF_8);
     }
 
     @Bean(name = "stringDecoder")
     public StringDecoder stringDecoder() {
-        return new StringDecoder();
+        return new StringDecoder(CharsetUtil.UTF_8);
     }
 
 

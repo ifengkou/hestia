@@ -9,3 +9,6 @@ spring + netty + kafka 基础型项目
 
     https://www.ishuo.cn/doc/kdvjmiqf.html
     http://www.cnblogs.com/rainy-shurun/p/5213086.html
+
+优化技巧
+    http://blog.csdn.net/babydavic/article/details/8558945

@@ -41,28 +41,4 @@ public class TCPChannelInitializer  extends ChannelInitializer<SocketChannel> {
         pipeline.addLast("encoder", stringEncoder);
     }
 
-    public StringDecoder getStringDecoder() {
-        return stringDecoder;
-    }
-
-    public void setStringDecoder(StringDecoder stringDecoder) {
-        this.stringDecoder = stringDecoder;
-    }
-
-    public StringEncoder getStringEncoder() {
-        return stringEncoder;
-    }
-
-    public void setStringEncoder(StringEncoder stringEncoder) {
-        this.stringEncoder = stringEncoder;
-    }
-
-    public ServerHandler getServerHandler() {
-        return serverHandler;
-    }
-
-    public void setServerHandler(ServerHandler serverHandler) {
-        this.serverHandler = serverHandler;
-    }
-
 }

@@ -1,5 +1,6 @@
 package cn.ifengkou.hestia.test;
 
+import cn.ifengkou.hestia.serialize.RpcSerializeProtocol;
 import org.junit.Test;
 
 /**
@@ -15,5 +16,9 @@ public class CommonTest
     public void testAvailableProcessors(){
         int numb = Runtime.getRuntime().availableProcessors();
         System.out.println(String.valueOf(numb));
+    }
+    @Test
+    public void testRpcSerializeProtocolToString(){
+        System.out.print(RpcSerializeProtocol.PROTOSTUFFSERIALIZE.toString());
     }
 }
