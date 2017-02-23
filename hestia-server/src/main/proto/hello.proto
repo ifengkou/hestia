@@ -1,0 +1,15 @@
+package search;
+
+option java_package = "cn.ifengkou.hestia.model";
+
+message HelloRequest {
+    optional string name = 1;
+}
+
+message HelloResponse {
+    optional string greeting = 1;
+}
+
+service HelloService {
+    rpc hello (HelloRequest) returns (HelloResponse);
+}

@@ -9,7 +9,7 @@ import io.netty.channel.socket.SocketChannel;
 
 /**
  * @author shenlongguang<https://github.com/ifengkou>
- * @Description 一句话描述类是干什么的
+ * @Description 使用 protostuff 序列化bean 的handler
  * @package cn.ifengkou.hestia.handler
  * @date 2017/2/22 17:12
  */

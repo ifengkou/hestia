@@ -148,6 +148,29 @@
                         </execution>
                     </executions>
                 </plugin>
+                <plugin>
+                    <groupId>io.protostuff</groupId>
+                    <artifactId>protostuff-maven-plugin</artifactId>
+                    <version>1.3.5</version>
+                    <configuration>
+                        <protoModules>
+                            <protoModule>
+                                <source>src/main/proto</source>
+                                <outputDir>src/main/java/model</outputDir>
+                                <output>java_bean</output>
+                            </protoModule>
+                        </protoModules>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <id>generate-sources</id>
+                            <phase>generate-sources</phase>
+                            <goals>
+                                <goal>compile</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
             </plugins>
         </pluginManagement>
     </build>

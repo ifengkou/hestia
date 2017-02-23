@@ -21,7 +21,7 @@ import io.netty.handler.codec.MessageToByteEncoder;
 
 /**
  * @author shenlongguang<https://github.com/ifengkou>
- * @Description RpcSerialize interface
+ * @Description MessageEncoder
  * @package cn.ifengkou.hestia.serialize
  * @date 2017/2/22 14:26
  */

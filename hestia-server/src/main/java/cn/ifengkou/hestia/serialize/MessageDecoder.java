@@ -26,7 +26,7 @@ import java.util.List;
 
 /**
  * @author shenlongguang<https://github.com/ifengkou>
- * @Description RpcSerialize interface
+ * @Description MessageDecoder
  * @package cn.ifengkou.hestia.serialize
  * @date 2017/2/22 14:26
  */
