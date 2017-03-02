@@ -1,6 +1,6 @@
 package cn.ifengkou.hestia.config;
 
-import cn.ifengkou.hestia.handler.TCPChannelInitializer;
+import cn.ifengkou.hestia.handler.ProtobuffChannelInitializer;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelOption;
 import io.netty.channel.WriteBufferWaterMark;
@@ -9,6 +9,8 @@ import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.codec.string.StringDecoder;
 import io.netty.handler.codec.string.StringEncoder;
 import io.netty.util.CharsetUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -45,9 +47,13 @@ public class SpringConfig {
     @Value("${so.backlog}")
     private int backlog;
 
-    @Autowired
+    /*@Autowired
     @Qualifier("tcpChannelInitializer")
-    private TCPChannelInitializer tcpChannelInitializer;
+    private TCPChannelInitializer tcpChannelInitializer;*/
+
+    @Autowired
+    @Qualifier("protobuffChannelInitializer")
+    private ProtobuffChannelInitializer protobuffChannelInitializer;
 
     @Bean(name = "bossGroup", destroyMethod = "shutdownGracefully")
     public NioEventLoopGroup bossGroup() {
@@ -92,7 +98,7 @@ public class SpringConfig {
     @Bean(name = "serverBootstrap")
     public ServerBootstrap bootstrap() {
         ServerBootstrap bootstrap = new ServerBootstrap();
-        bootstrap.group(bossGroup(), workerGroup()).channel(NioServerSocketChannel.class).childHandler(tcpChannelInitializer);
+        bootstrap.group(bossGroup(), workerGroup()).channel(NioServerSocketChannel.class).childHandler(protobuffChannelInitializer);
         Map<ChannelOption<?>, Object> tcpChannelOptions = tcpChannelOptions();
         Set<ChannelOption<?>> keySet = tcpChannelOptions.keySet();
         for (ChannelOption option : keySet) {

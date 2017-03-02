@@ -20,7 +20,7 @@ import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import java.io.Serializable;
 
 /**
- * MessageRequest bean
+ * MessageRequest 请求结构
  *
  * @author shenlongguang<https://github.com/ifengkou>
  * @date 2017/2/22 17:29
@@ -28,10 +28,8 @@ import java.io.Serializable;
 public class MessageRequest implements Serializable {
 
     private String messageId;
-    private String className;
-    private String methodName;
-    private Class<?>[] typeParameters;
-    private Object[] parametersVal;
+    private int messageType;
+    private String message;
 
     public String getMessageId() {
         return messageId;
@@ -41,40 +39,24 @@ public class MessageRequest implements Serializable {
         this.messageId = messageId;
     }
 
-    public String getClassName() {
-        return className;
+    public int getMessageType() {
+        return messageType;
     }
 
-    public void setClassName(String className) {
-        this.className = className;
+    public void setMessageType(int messageType) {
+        this.messageType = messageType;
     }
 
-    public String getMethodName() {
-        return methodName;
+    public String getMessage() {
+        return message;
     }
 
-    public void setMethodName(String methodName) {
-        this.methodName = methodName;
-    }
-
-    public Class<?>[] getTypeParameters() {
-        return typeParameters;
-    }
-
-    public void setTypeParameters(Class<?>[] typeParameters) {
-        this.typeParameters = typeParameters;
-    }
-
-    public Object[] getParameters() {
-        return parametersVal;
-    }
-
-    public void setParameters(Object[] parametersVal) {
-        this.parametersVal = parametersVal;
+    public void setMessage(String message) {
+        this.message = message;
     }
 
     public String toString() {
-        return ReflectionToStringBuilder.toStringExclude(this, new String[]{"typeParameters", "parametersVal"});
+        return ReflectionToStringBuilder.toStringExclude(this, new String[]{"messageType", "message"});
     }
 }
 

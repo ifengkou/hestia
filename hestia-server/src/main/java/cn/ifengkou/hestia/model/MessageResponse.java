@@ -20,7 +20,7 @@ import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import java.io.Serializable;
 
 /**
- * MessageResponse bean
+ * MessageResponse 应答结构
  *
  * @author shenlongguang<https://github.com/ifengkou>
  * @date 2017/2/22 17:26

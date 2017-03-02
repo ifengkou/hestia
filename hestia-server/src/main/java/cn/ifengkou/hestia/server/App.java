@@ -18,7 +18,7 @@ public class App {
 
     //private static final Object WAIT_OBJECT = new Object();
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
         LOGGER.info("Start Application");
 
         AbstractApplicationContext context = new AnnotationConfigApplicationContext(SpringConfig.class);
@@ -32,6 +32,7 @@ public class App {
                 LOGGER.error("Main Thread interrupted",e);
             }
         }*/
+        context.destroy();
     }
 
 }
