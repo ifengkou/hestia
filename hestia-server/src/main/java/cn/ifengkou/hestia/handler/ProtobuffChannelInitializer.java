@@ -8,12 +8,11 @@ import io.netty.channel.ChannelPipeline;
 import io.netty.channel.socket.SocketChannel;
 
 /**
+ * 使用 protostuff 序列化bean 的handler
+ *
  * @author shenlongguang<https://github.com/ifengkou>
- * @Description 使用 protostuff 序列化bean 的handler
- * @package cn.ifengkou.hestia.handler
- * @date 2017/2/22 17:12
+ * @date 2017/2/22 19:42
  */
-
 public class ProtobuffChannelInitializer extends ChannelInitializer<SocketChannel> {
 
     @Override

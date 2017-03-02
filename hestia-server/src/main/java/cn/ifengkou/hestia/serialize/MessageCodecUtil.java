@@ -20,9 +20,9 @@ import io.netty.buffer.ByteBuf;
 import java.io.IOException;
 
 /**
+ * MessageCodec 接口
+ *
  * @author shenlongguang<https://github.com/ifengkou>
- * @Description MessageCodec 接口
- * @package cn.ifengkou.hestia.serialize
  * @date 2017/2/22 14:26
  */
 public interface MessageCodecUtil {

@@ -24,6 +24,12 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * RuntimeSchema ,使用guava中的Cache进行缓存，避免频繁创建
+ *
+ * @author shenlongguang<https://github.com/ifengkou>
+ * @date 2017/3/2 11:30
+ */
 public class SchemaCache {
     private static class SchemaCacheHolder {
         private static SchemaCache cache = new SchemaCache();

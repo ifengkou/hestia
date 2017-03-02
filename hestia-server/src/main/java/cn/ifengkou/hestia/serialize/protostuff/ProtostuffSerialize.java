@@ -29,11 +29,10 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 /**
- * @author tangjie<https://github.com/tang-jie>
- * @filename:ProtostuffSerialize.java
- * @description:ProtostuffSerialize功能模块
- * @blogs http://www.cnblogs.com/jietang/
- * @since 2016/10/7
+ * ProtostuffSerialize 对象
+ *
+ * @author shenlongguang<https://github.com/ifengkou>
+ * @date 2017/2/22 15:20
  */
 public class ProtostuffSerialize implements RpcSerialize {
     private static SchemaCache cachedSchema = SchemaCache.getInstance();

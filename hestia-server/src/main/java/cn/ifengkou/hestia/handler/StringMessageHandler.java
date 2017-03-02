@@ -17,10 +17,10 @@ import org.springframework.stereotype.Component;
  */
 
 @Component
-@Qualifier("serverHandler")
+@Qualifier("stringMessageHandler")
 @ChannelHandler.Sharable
-public class ServerHandler extends SimpleChannelInboundHandler<String> {
-    private static final Logger LOGGER = LoggerFactory.getLogger(ServerHandler.class);
+public class StringMessageHandler extends SimpleChannelInboundHandler<String> {
+    private static final Logger LOGGER = LoggerFactory.getLogger(StringMessageHandler.class);
 
     @Override
     public void channelRead0(ChannelHandlerContext ctx, String msg) throws Exception {

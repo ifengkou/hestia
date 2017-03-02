@@ -20,11 +20,10 @@ import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import java.io.Serializable;
 
 /**
- * @author tangjie<https://github.com/tang-jie>
- * @filename:MessageResponse.java
- * @description:MessageResponse功能模块
- * @blogs http://www.cnblogs.com/jietang/
- * @since 2016/10/7
+ * MessageResponse bean
+ *
+ * @author shenlongguang<https://github.com/ifengkou>
+ * @date 2017/2/22 17:26
  */
 public class MessageResponse implements Serializable {
 

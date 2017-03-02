@@ -20,9 +20,9 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.MessageToByteEncoder;
 
 /**
+ * MessageDecoder 解码 适配器
+ *
  * @author shenlongguang<https://github.com/ifengkou>
- * @Description MessageEncoder
- * @package cn.ifengkou.hestia.serialize
  * @date 2017/2/22 14:26
  */
 public class MessageEncoder extends MessageToByteEncoder<Object> {

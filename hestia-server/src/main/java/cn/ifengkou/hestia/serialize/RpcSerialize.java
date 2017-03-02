@@ -5,9 +5,9 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 /**
+ * RpcSerialize interface
+ *
  * @author shenlongguang<https://github.com/ifengkou>
- * @Description RpcSerialize interface
- * @package cn.ifengkou.hestia.serialize
  * @date 2017/2/22 14:26
  */
 public interface RpcSerialize {

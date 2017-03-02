@@ -24,7 +24,7 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * Description: Spring configuration component
+ * Spring configuration component
  *
  * @author shenlongguang
  * @version 1.0

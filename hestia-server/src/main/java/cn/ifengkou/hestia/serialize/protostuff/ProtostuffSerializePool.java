@@ -1,36 +1,49 @@
 package cn.ifengkou.hestia.serialize.protostuff;
 
 import org.apache.commons.pool2.impl.GenericObjectPool;
-import org.apache.commons.pool2.impl.GenericObjectPoolConfig;
 
 /**
+ * ProtostuffSerialize 对象池。多线程 单例（单对象，单池）
+ * 利用commons.pool2的对象池 对 序列化对象 进行池化
+ *
  * @author shenlongguang<https://github.com/ifengkou>
- * @Description 一句话描述类是干什么的
- * @package cn.ifengkou.hestia.serialize.protostuff
  * @date 2017/2/22 15:20
  */
-
 public class ProtostuffSerializePool {
-    private GenericObjectPool<ProtostuffSerialize> ProtostuffPool;
-    volatile private static ProtostuffSerializePool poolFactory = null;
+    //序列化池
+    private GenericObjectPool<ProtostuffSerialize> serializerPool;
+    //当前对象实例
+    volatile private static ProtostuffSerializePool factoryInstance = null;
 
     private ProtostuffSerializePool() {
-        ProtostuffPool = new GenericObjectPool<ProtostuffSerialize>(new ProtostuffSerializeFactory());
+        serializerPool = new GenericObjectPool<ProtostuffSerialize>(new ProtostuffSerializeFactory());
     }
 
+    /**
+     * 实例化 protostuff 序列化池；多线程 单例
+     * @return
+     */
     public static ProtostuffSerializePool getProtostuffPoolInstance() {
-        if (poolFactory == null) {
+        if (factoryInstance == null) {
             synchronized (ProtostuffSerializePool.class) {
-                if (poolFactory == null) {
-                    poolFactory = new ProtostuffSerializePool();
+                if (factoryInstance == null) {
+                    factoryInstance = new ProtostuffSerializePool();
                 }
             }
         }
-        return poolFactory;
+        return factoryInstance;
     }
 
-    public ProtostuffSerializePool(final int maxTotal, final int minIdle, final long maxWaitMillis, final long minEvictableIdleTimeMillis) {
-        ProtostuffPool = new GenericObjectPool<ProtostuffSerialize>(new ProtostuffSerializeFactory());
+    /**
+     * 获取 protostuff 序列化池对象
+     * @return 池对象
+     */
+    public GenericObjectPool<ProtostuffSerialize> getSerializerPool() {
+        return serializerPool;
+    }
+
+    /*public ProtostuffSerializePool(final int maxTotal, final int minIdle, final long maxWaitMillis, final long minEvictableIdleTimeMillis) {
+        serializerPool = new GenericObjectPool<ProtostuffSerialize>(new ProtostuffSerializeFactory());
 
         GenericObjectPoolConfig config = new GenericObjectPoolConfig();
 
@@ -39,11 +52,12 @@ public class ProtostuffSerializePool {
         config.setMaxWaitMillis(maxWaitMillis);
         config.setMinEvictableIdleTimeMillis(minEvictableIdleTimeMillis);
 
-        ProtostuffPool.setConfig(config);
-    }
+        serializerPool.setConfig(config);
+    }*/
+
     public ProtostuffSerialize borrow() {
         try {
-            return getProtostuffPool().borrowObject();
+            return getSerializerPool().borrowObject();
         } catch (final Exception ex) {
             ex.printStackTrace();
             return null;
@@ -51,10 +65,8 @@ public class ProtostuffSerializePool {
     }
 
     public void restore(final ProtostuffSerialize object) {
-        getProtostuffPool().returnObject(object);
+        getSerializerPool().returnObject(object);
     }
 
-    public GenericObjectPool<ProtostuffSerialize> getProtostuffPool() {
-        return ProtostuffPool;
-    }
+
 }

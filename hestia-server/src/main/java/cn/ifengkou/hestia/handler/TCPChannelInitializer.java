@@ -29,7 +29,7 @@ public class TCPChannelInitializer  extends ChannelInitializer<SocketChannel> {
     StringEncoder stringEncoder;
 
     @Autowired
-    ServerHandler serverHandler;
+    StringMessageHandler stringMessageHandler;
 
     @Override
     protected void initChannel(SocketChannel ch) throws Exception {
@@ -37,7 +37,7 @@ public class TCPChannelInitializer  extends ChannelInitializer<SocketChannel> {
         ByteBuf delimiter = Unpooled.copiedBuffer("&".getBytes());
         pipeline.addLast(new DelimiterBasedFrameDecoder(1024,delimiter));
         pipeline.addLast("decoder", stringDecoder);
-        pipeline.addLast("handler", serverHandler);
+        pipeline.addLast("handler", stringMessageHandler);
         pipeline.addLast("encoder", stringEncoder);
     }
 

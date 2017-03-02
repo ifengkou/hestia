@@ -15,14 +15,6 @@
  */
 package cn.ifengkou.hestia.model;
 
-/**
- * @filename:MessageKeyVal.java
- * @description:MessageKeyVal鍔熻兘妯″潡
- * @author tangjie<https://github.com/tang-jie>
- * @blogs http://www.cnblogs.com/jietang/
- * @since 2016/10/7
- */
-
 import java.util.Map;
 
 public class MessageKeyVal {

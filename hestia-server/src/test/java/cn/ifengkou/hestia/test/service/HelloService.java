@@ -10,9 +10,9 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
 /**
+ * 测试protostuff service 类
+ *
  * @author shenlongguang<https://github.com/ifengkou>
- * @Description 一句话描述类是干什么的
- * @package cn.ifengkou.hestia.test.service
  * @date 2017/2/23 17:19
  */
 

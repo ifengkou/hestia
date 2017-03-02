@@ -4,11 +4,12 @@ import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
 /**
+ * RpcSerializeProtocol 可选序列化种类（只实现protostuff）
+ *
  * @author shenlongguang<https://github.com/ifengkou>
- * @Description SerializeProtocol enum
- * @package cn.ifengkou.hestia.serialize
- * @date 2017/2/22 14:26
+ * @date 2017/2/22 14:24
  */
+@Deprecated
 public enum RpcSerializeProtocol {
     JDKSERIALIZE("jdknative"), KRYOSERIALIZE("kryo"), HESSIANSERIALIZE("hessian"), PROTOSTUFFSERIALIZE("protostuff");
 

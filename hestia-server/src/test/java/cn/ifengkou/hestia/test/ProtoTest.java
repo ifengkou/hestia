@@ -6,12 +6,11 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
+ *
+ * 原生proto 测试
  * @author shenlongguang<https://github.com/ifengkou>
- * @Description proto 测试
- * @package cn.ifengkou.hestia.test
  * @date 2017/2/23 17:19
  */
-
 public class ProtoTest {
 
     public static final byte[] REQUEST = new byte[] { 0x0A, 0x03, 'i', 'f', 'k' };

@@ -4,11 +4,12 @@ import org.apache.commons.pool2.BasePooledObjectFactory;
 import org.apache.commons.pool2.PooledObject;
 import org.apache.commons.pool2.impl.DefaultPooledObject;
 
+
 /**
+ * ProtostuffSerializeFactory 工厂类
+ *
  * @author shenlongguang<https://github.com/ifengkou>
- * @Description 一句话描述类是干什么的
- * @package cn.ifengkou.hestia.serialize.protostuff
- * @date 2017/2/22 14:56
+ * @date 2017/2/22 15:20
  */
 public class ProtostuffSerializeFactory extends BasePooledObjectFactory<ProtostuffSerialize> {
     private ProtostuffSerialize createProtostuff() {

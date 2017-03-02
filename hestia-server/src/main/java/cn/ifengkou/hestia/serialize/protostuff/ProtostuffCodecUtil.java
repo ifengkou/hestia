@@ -9,9 +9,9 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
 /**
+ * ProtostuffCodecUtil protostuff codec 实现类
+ *
  * @author shenlongguang<https://github.com/ifengkou>
- * @Description ProtostuffCodecUtil protostuff codec 实现类
- * @package cn.ifengkou.hestia.serialize.protostuff
  * @date 2017/2/22 16:14
  */
 

@@ -4,9 +4,9 @@ import cn.ifengkou.hestia.serialize.MessageCodecUtil;
 import cn.ifengkou.hestia.serialize.MessageEncoder;
 
 /**
+ * Encoder 解码器
+ *
  * @author shenlongguang<https://github.com/ifengkou>
- * @Description Encoder 解码器
- * @package cn.ifengkou.hestia.serialize.protostuff
  * @date 2017/2/22 16:12
  */
 

@@ -25,10 +25,10 @@ import java.io.IOException;
 import java.util.List;
 
 /**
+ * MessageDecoder 解码 适配器
+ *
  * @author shenlongguang<https://github.com/ifengkou>
- * @Description MessageDecoder
- * @package cn.ifengkou.hestia.serialize
- * @date 2017/2/22 14:26
+ * @date 2017/2/22 14:20
  */
 public class MessageDecoder extends ByteToMessageDecoder {
     private static final Logger LOGGER = LoggerFactory.getLogger(MessageDecoder.class);
