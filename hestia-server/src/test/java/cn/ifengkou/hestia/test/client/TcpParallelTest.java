@@ -30,14 +30,14 @@ public class TcpParallelTest {
         }
 
         //并行度1000
-        int parallel = 1000;
+        int parallel = 10000;
 
         for (int i = 0; i < 1; i++) {
             addTask(parallel);
             System.out.printf("[author sloong] Netty Server 消息协议序列化第[%d]轮并发验证结束!\n\n", i);
         }
 
-        channel.close();
+        //channel.close();
     }
 
     public static void addTask(int parallel) throws InterruptedException {
@@ -52,9 +52,10 @@ public class TcpParallelTest {
 
         CountDownLatch signal = new CountDownLatch(1);
         CountDownLatch finish = new CountDownLatch(parallel);
-        MessageRequest messageRequest = new MessageRequest();
-        messageRequest.setMessageType(0);
+
         for (int index = 0; index < parallel; index++) {
+            MessageRequest messageRequest = new MessageRequest();
+            messageRequest.setMessageType(0);
             messageRequest.setMessageId(UUID.randomUUID().toString());
             messageRequest.setMessage("message_No." + index);
             SendMessageParallelRequestThread client = new SendMessageParallelRequestThread(channel, messageRequest, signal, finish, index);

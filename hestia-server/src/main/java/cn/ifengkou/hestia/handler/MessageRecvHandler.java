@@ -19,7 +19,6 @@ public class MessageRecvHandler extends ChannelInboundHandlerAdapter {
 
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
         MessageRequest request = (MessageRequest) msg;
-        LOGGER.info("receive a message{}", request.getMessage());
         messageId = request.getMessageId();
         MessageResponse response = new MessageResponse();
         response.setMessageId(messageId);
@@ -30,7 +29,7 @@ public class MessageRecvHandler extends ChannelInboundHandlerAdapter {
             //TODO 消息处理，不要阻塞NIO 线程，复杂的业务逻辑放到kafka consumer 中来处理
             //对收到的数据包进行过滤，解密,校验
             //合法消息存入kafka
-            LOGGER.info("receive a message{}", request.getMessage());
+            LOGGER.info("receive a message = {}", request.getMessage());
 
         } catch (Throwable t) {
             response.setError(t.toString());
