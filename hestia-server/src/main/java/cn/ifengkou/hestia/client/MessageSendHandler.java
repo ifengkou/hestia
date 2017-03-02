@@ -27,13 +27,6 @@ import org.slf4j.LoggerFactory;
 
 import java.net.SocketAddress;
 
-/**
- * @author tangjie<https://github.com/tang-jie>
- * @filename:MessageSendHandler.java
- * @description:MessageSendHandler功能模块
- * @blogs http://www.cnblogs.com/jietang/
- * @since 2016/10/7
- */
 public class MessageSendHandler extends ChannelInboundHandlerAdapter {
 
     private final static Logger LOGGER = LoggerFactory.getLogger(MessageSendHandler.class);
@@ -60,8 +53,8 @@ public class MessageSendHandler extends ChannelInboundHandlerAdapter {
 
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
         MessageResponse response = (MessageResponse) msg;
-        String messageId = response.getMessageId();
-        LOGGER.info("收到反馈,messageId:{}", messageId);
+        String result = (String) response.getResult();
+        LOGGER.info("收到反馈,msgId{} result:{}", response.getMessageId(), result);
     }
 
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {

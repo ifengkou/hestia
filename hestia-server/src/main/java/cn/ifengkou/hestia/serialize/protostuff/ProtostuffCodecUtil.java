@@ -35,7 +35,6 @@ public class ProtostuffCodecUtil implements MessageCodecUtil {
 
     public void encode(final ByteBuf out, final Object message) throws IOException {
         try {
-            LOGGER.debug("message out");
             ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
             closer.register(byteArrayOutputStream);
             ProtostuffSerialize protostuffSerialization = pool.borrow();
@@ -45,6 +44,8 @@ public class ProtostuffCodecUtil implements MessageCodecUtil {
             out.writeInt(dataLength);
             out.writeBytes(body);
             pool.restore(protostuffSerialization);
+        } catch (Exception e) {
+            LOGGER.error("error msg:{}", e.getMessage());
         } finally {
             closer.close();
         }
@@ -53,7 +54,6 @@ public class ProtostuffCodecUtil implements MessageCodecUtil {
     @Override
     public Object decode(byte[] body) throws IOException {
         try {
-            LOGGER.debug("message in {}", Kit.toHex(body));
             ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(body);
             closer.register(byteArrayInputStream);
             ProtostuffSerialize protostuffSerialization = pool.borrow();

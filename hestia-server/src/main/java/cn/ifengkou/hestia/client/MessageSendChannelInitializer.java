@@ -1,13 +1,13 @@
 package cn.ifengkou.hestia.client;
 
+import cn.ifengkou.hestia.serialize.protostuff.ProtostuffCodecUtil;
+import cn.ifengkou.hestia.serialize.protostuff.ProtostuffDecoder;
+import cn.ifengkou.hestia.serialize.protostuff.ProtostuffEncoder;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelPipeline;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.handler.codec.LengthFieldBasedFrameDecoder;
 import io.netty.handler.codec.LengthFieldPrepender;
-import io.netty.handler.codec.serialization.ClassResolvers;
-import io.netty.handler.codec.serialization.ObjectDecoder;
-import io.netty.handler.codec.serialization.ObjectEncoder;
 
 /**
  * 描述
@@ -28,10 +28,12 @@ public class MessageSendChannelInitializer extends ChannelInitializer<SocketChan
         //利用LengthFieldPrepender回填补充ObjectDecoder消息报文头
         pipeline.addLast(new LengthFieldPrepender(MessageSendChannelInitializer.MESSAGE_LENGTH));
 
-        pipeline.addLast(new ObjectEncoder());
-        //考虑到并发性能，采用weakCachingConcurrentResolver缓存策略。一般情况使用:cacheDisabled即可
-        pipeline.addLast(new ObjectDecoder(Integer.MAX_VALUE, ClassResolvers.weakCachingConcurrentResolver(this.getClass().getClassLoader())));
+        ProtostuffCodecUtil util = new ProtostuffCodecUtil();
+        util.setRpcDirect(false);
+        pipeline.addLast(new ProtostuffDecoder(util));
         pipeline.addLast(new MessageSendHandler());
+        pipeline.addLast(new ProtostuffEncoder(util));
+
 
     }
 }

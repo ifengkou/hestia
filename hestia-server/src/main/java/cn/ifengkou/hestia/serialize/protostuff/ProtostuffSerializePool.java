@@ -27,9 +27,7 @@ public class ProtostuffSerializePool {
         config.setMinIdle(2);
         config.setMaxWaitMillis(5000);
         //config.setMinEvictableIdleTimeMillis(minEvictableIdleTimeMillis);
-
         serializerPool.setConfig(config);
-        LOGGER.info("ProtostuffSerialize池化，数量：{}", serializerPool.getNumIdle());
     }
 
     /**

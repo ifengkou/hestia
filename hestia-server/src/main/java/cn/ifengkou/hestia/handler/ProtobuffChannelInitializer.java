@@ -28,6 +28,7 @@ public class ProtobuffChannelInitializer extends ChannelInitializer<SocketChanne
         ChannelPipeline pipeline = socketChannel.pipeline();
 
         pipeline.addLast(new LengthFieldBasedFrameDecoder(MAX_FRAME_LENGTH, 0, LENGTHFIELD_LENGTH, 0, LENGTHFIELD_LENGTH));
+        pipeline.addLast(new LengthFieldPrepender(LENGTHFIELD_LENGTH));
 
         ProtostuffCodecUtil util = new ProtostuffCodecUtil();
         util.setRpcDirect(true);
@@ -36,6 +37,6 @@ public class ProtobuffChannelInitializer extends ChannelInitializer<SocketChanne
         pipeline.addLast(new ProtostuffEncoder(util));
         //空闲读超时设置
         //pipeline.addLast(new IdleStateHandler(40, 0, 0));
-        pipeline.addLast(new LengthFieldPrepender(LENGTHFIELD_LENGTH));
+
     }
 }
