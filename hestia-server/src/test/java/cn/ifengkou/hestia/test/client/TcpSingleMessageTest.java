@@ -43,11 +43,11 @@ public class TcpSingleMessageTest {
         MessageRequest messageRequest = new MessageRequest();
         messageRequest.setMessageType(0);
         messageRequest.setMessageId(UUID.randomUUID().toString());
-        messageRequest.setMessage("message_No.001 从client 001 发出，一会我也要收到");
+        messageRequest.setMessage("message_No.001 从client 001 发出");
 
         channel.writeAndFlush(messageRequest).addListener(new ChannelFutureListener() {
             public void operationComplete(ChannelFuture channelFuture) throws Exception {
-                System.out.printf("--消息发送");
+                System.out.println("--消息发送");
             }
         });
 

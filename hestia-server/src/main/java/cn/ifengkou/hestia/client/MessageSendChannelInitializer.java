@@ -22,18 +22,15 @@ public class MessageSendChannelInitializer extends ChannelInitializer<SocketChan
     @Override
     protected void initChannel(SocketChannel socketChannel) throws Exception {
         ChannelPipeline pipeline = socketChannel.pipeline();
-        //ObjectDecoder的基类半包解码器LengthFieldBasedFrameDecoder的报文格式保持兼容。因为底层的父类LengthFieldBasedFrameDecoder
-        //的初始化参数即为super(maxObjectSize, 0, 4, 0, 4);
-        pipeline.addLast(new LengthFieldBasedFrameDecoder(MAX_FRAME_LENGTH, 0, MessageSendChannelInitializer.MESSAGE_LENGTH, 0, MessageSendChannelInitializer.MESSAGE_LENGTH));
-        //利用LengthFieldPrepender回填补充ObjectDecoder消息报文头
-        pipeline.addLast(new LengthFieldPrepender(MessageSendChannelInitializer.MESSAGE_LENGTH));
+
+        pipeline.addLast("frameDecode", new LengthFieldBasedFrameDecoder(MAX_FRAME_LENGTH, 0, MESSAGE_LENGTH, 0, MESSAGE_LENGTH));
+        pipeline.addLast("frameEncode", new LengthFieldPrepender(MESSAGE_LENGTH));
 
         ProtostuffCodecUtil util = new ProtostuffCodecUtil();
         util.setRpcDirect(false);
-        pipeline.addLast(new ProtostuffDecoder(util));
-        pipeline.addLast(new MessageSendHandler());
-        pipeline.addLast(new ProtostuffEncoder(util));
+        pipeline.addLast("decoder", new ProtostuffDecoder(util));
 
-
+        pipeline.addLast("encoder", new ProtostuffEncoder(util));
+        pipeline.addLast("handler", new MessageSendHandler());
     }
 }

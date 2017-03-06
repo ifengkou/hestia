@@ -27,16 +27,16 @@ public class ProtobuffChannelInitializer extends ChannelInitializer<SocketChanne
     protected void initChannel(SocketChannel socketChannel) throws Exception {
         ChannelPipeline pipeline = socketChannel.pipeline();
 
-        pipeline.addLast(new LengthFieldBasedFrameDecoder(MAX_FRAME_LENGTH, 0, LENGTHFIELD_LENGTH, 0, LENGTHFIELD_LENGTH));
-        pipeline.addLast(new LengthFieldPrepender(LENGTHFIELD_LENGTH));
+        pipeline.addLast("frameDecode", new LengthFieldBasedFrameDecoder(MAX_FRAME_LENGTH, 0, LENGTHFIELD_LENGTH, 0, LENGTHFIELD_LENGTH));
+        pipeline.addLast("frameEncode", new LengthFieldPrepender(LENGTHFIELD_LENGTH));
 
         ProtostuffCodecUtil util = new ProtostuffCodecUtil();
         util.setRpcDirect(true);
-        pipeline.addLast(new ProtostuffDecoder(util));
-        pipeline.addLast(new MessageRecvHandler());
-        pipeline.addLast(new ProtostuffEncoder(util));
+
+        pipeline.addLast("decoder", new ProtostuffDecoder(util));
+        pipeline.addLast("encoder", new ProtostuffEncoder(util));
+        pipeline.addLast("handler", new MessageRecvHandler());
         //空闲读超时设置
         //pipeline.addLast(new IdleStateHandler(40, 0, 0));
-
     }
 }
