@@ -1,4 +1,5 @@
-java 代码：http://blog.csdn.net/u011734144/article/details/52351289
+java 代码：
+http://blog.csdn.net/u011734144/article/details/52351289
 
 ##kafka producer 优化
 
@@ -32,3 +33,4 @@ kafka设计逻辑：并没有使用持久性质的connection，so having a pool 
 回复四：
 
 In general, a single producer for all topics will be more network efficient.
+

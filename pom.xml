@@ -10,8 +10,7 @@
     <version>1.0</version>
     <modules>
         <module>hestia-server</module>
-        <module>hestia-kafka-producer</module>
-        <module>hestia-kafka-consumer</module>
+        <module>hestia-kafka</module>
     </modules>
 
     <properties>

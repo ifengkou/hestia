@@ -4,8 +4,8 @@
        xmlns:int="http://www.springframework.org/schema/integration"
        xmlns:int-kafka="http://www.springframework.org/schema/integration/kafka"
        xsi:schemaLocation="http://www.springframework.org/schema/integration/kafka http://www.springframework.org/schema/integration/kafka/spring-integration-kafka.xsd
-		http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration.xsd
-		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+        http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration.xsd
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
     <int:channel id="outWriteBackLemmaRecordChannel" />
 
@@ -41,5 +41,5 @@
     </bean>
 
     <bean id="kafkaProducerService"
-          class="com.soso.baike.admin.service.kafka.producer.impl.KafkaProducerServiceImpl"/>
+          class="cn.ifengkou.hestia.kafka.KafkaProducerServiceImpl"/>
 </beans>
