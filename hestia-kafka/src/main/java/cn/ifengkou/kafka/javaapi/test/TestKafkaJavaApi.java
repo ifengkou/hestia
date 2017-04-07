@@ -7,7 +7,7 @@ package cn.ifengkou.kafka.javaapi.test;
  * @date 2017/4/6 17:24
  */
 
-public class KafkaJavaApiTest {
+public class TestKafkaJavaApi {
 
     public static void main(String[] args) {
         KafkaProducer producerThread = new KafkaProducer(KafkaProperties.topic);

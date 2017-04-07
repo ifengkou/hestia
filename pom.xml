@@ -46,6 +46,13 @@
                     </exclusion>
                 </exclusions>
             </dependency>
+            <!-- https://mvnrepository.com/artifact/org.springframework/spring-core -->
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-core</artifactId>
+                <version>${org.springframework.version}</version>
+            </dependency>
+
 
             <!-- https://mvnrepository.com/artifact/io.netty/netty-all -->
             <dependency>

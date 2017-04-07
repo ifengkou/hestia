@@ -1,6 +1,9 @@
 java 代码：
 http://blog.csdn.net/u011734144/article/details/52351289
 
+http://blog.csdn.net/suifeng3051/article/details/48053965
+
+
 ##kafka producer 优化
 
 原文：[producer-performance-tuning-for-apache-kafka](http://www.slideshare.net/JiangjieQin/producer-performance-tuning-for-apache-kafka-63147600?qid=84026ff8-243f-49a7-a4d0-69976cf317b7&v=&b=&from_search=9)
