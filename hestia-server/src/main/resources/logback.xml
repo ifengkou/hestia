@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--实时查看logback运行状态。默认值为false。-->
+<configuration scan="false" scanPeriod="60 seconds" debug="false">
+    <property resource="application.properties"/>
+    <property name="log.project.level" value="${log.project.level}"/>
+    <property name="log.program.level" value="${log.program.level}"/>
+    <property name="log.base" value="${log.base.path}"/>
+    <property name="log.moduleName" value="${log.moduleName}"/>
+    <property name="log.max.size" value="50MB"/>
+
+    <!-- ch.qos.logback.core.ConsoleAppender 表示控制台输出 -->
+    <appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- 这是用来保存项目代码中的日志 -->
+    <appender name="project.all" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${log.base}/${log.moduleName}.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${log.base}/archive/${log.moduleName}_all_%d{yyyy-MM-dd}.%i.log.zip</fileNamePattern>
+            <MaxHistory>365</MaxHistory>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>${log.max.size}</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%date{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%thread] %logger{56}.%method\(\):%L -%msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- 这是用来保存整个程序的日志（包含依赖组建的输出） -->
+    <appender name="program.all" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <File>${log.base}/${log.moduleName}_all.log</File>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <FileNamePattern>${log.base}/archive/${log.moduleName}_other_%d{yyyy-MM-dd}.%i.log.zip</FileNamePattern>
+            <MaxHistory>365</MaxHistory>
+            <timeBasedFileNamingAndTriggeringPolicy
+                class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>${log.max.size}</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%date{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%thread] %logger{56}.%method\(\):%L -%msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- 只用保存输出error级别的日志 -->
+    <appender name="file.error" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <File>${log.base}/${log.moduleName}_err.log</File>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <FileNamePattern>${log.base}/archive/${log.moduleName}_err_%d{yyyy-MM-dd}.%i.log.zip</FileNamePattern>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>${log.max.size}</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%date{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%thread] %logger{56}.%method\(\):%L -%msg%n</pattern>
+        </encoder>
+        <!-- 下面为配置只输出error级别的日志 -->
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>ERROR</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+    </appender>
+
+    <!-- 不丢失日志.默认的,如果队列的80%已满,则会丢弃TRACT、DEBUG、INFO级别的日志 -->
+    <!-- 更改默认的队列的深度,该值会影响性能.默认值为256 -->
+    <!-- 添加附加的appender,最多只能添加一个 -->
+    <appender name="project.async" class="ch.qos.logback.classic.AsyncAppender">
+        <discardingThreshold>0</discardingThreshold>
+        <queueSize>256</queueSize>
+        <includeCallerData>true</includeCallerData>
+        <appender-ref ref="project.all"/>
+    </appender>
+
+    <appender name="program.async" class="ch.qos.logback.classic.AsyncAppender">
+        <discardingThreshold>0</discardingThreshold>
+        <queueSize>256</queueSize>
+        <includeCallerData>true</includeCallerData>
+        <appender-ref ref="program.all"/>
+    </appender>
+
+    <!-- Spring framework logger -->
+    <logger name="org.springframework" level="error"></logger>
+
+    <logger name="cn.ifengkou.hestia" level="${log.project.level}" additivity="false">
+        <appender-ref ref="stdout"/>
+        <appender-ref ref="project.async"/>
+        <appender-ref ref="file.error"/>
+    </logger>
+
+    <root level="${log.program.level}">
+        <appender-ref ref="stdout"/>
+        <appender-ref ref="program.async"/>
+        <appender-ref ref="file.error"/>
+    </root>
+</configuration>
