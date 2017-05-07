@@ -32,6 +32,7 @@ public class TcpParallelTest {
         //并行度1000
         int parallel = 1000;
 
+
         for (int i = 0; i < 1; i++) {
             addTask(parallel);
             System.out.printf("[author sloong] Netty Server 消息协议序列化第[%d]轮并发验证结束!\n\n", i);

@@ -5,6 +5,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.integration.support.MessageBuilder;
 import org.springframework.messaging.MessageChannel;
 
+import java.util.Random;
 
 /**
  * 描述
@@ -15,6 +16,7 @@ import org.springframework.messaging.MessageChannel;
 
 public class SpringKafkaProducer {
     private static final String CONFIG = "/context_adapt.xml";
+    private static Random rand = new Random();
     private static ClassPathXmlApplicationContext ctx;
 
     static {
